@@ -58,11 +58,9 @@ bool Engine::build(std::string onnx_path)
   {
     return false;
   }
-  std::cout << "Create our engine builder Done\n";
 
   // Set the max supported batch size
   builder->setMaxBatchSize(options_.max_batch_size);
-  std::cout << "Set max batchi size Done\n";
 
   // Define an explicit batch size and then create the network.
   // More info here: https://docs.nvidia.com/deeplearning/tensorrt/developer-guide/index.html#explicit-implicit-batch
@@ -72,7 +70,6 @@ bool Engine::build(std::string onnx_path)
   {
     return false;
   }
-  std::cout << "Create INetWorkDefinition Done\n";
 
   // Create a parser for reading the onnx file.
   auto parser = std::unique_ptr<nvonnxparser::IParser>(nvonnxparser::createParser(*network, logger_));
@@ -80,7 +77,6 @@ bool Engine::build(std::string onnx_path)
   {
     return false;
   }
-  std::cout << "Create parser Done\n";
 
   // We are going to first read the onnx file into memory, then pass that buffer to the parser.
   // Had our onnx model file been encrypted, this approach would allow us to first decrypt the buffer.
@@ -93,14 +89,12 @@ bool Engine::build(std::string onnx_path)
   {
     throw std::runtime_error("Unable to read engine file");
   }
-  std::cout << "Read onnx file Done\n";
 
   auto parsed = parser->parse(buffer.data(), buffer.size());
   if (!parsed)
   {
     return false;
   }
-  std::cout << "Parser data from file done\n";
 
   // Save the input height, width, and channels.
   // Require this info for inference.
@@ -117,7 +111,6 @@ bool Engine::build(std::string onnx_path)
   {
     return false;
   }
-  std::cout << "Create config Done\n";
 
   // Specify the optimization profiles and the
   IOptimizationProfile *defaultProfile = builder->createOptimizationProfile();
@@ -146,7 +139,6 @@ bool Engine::build(std::string onnx_path)
     config->addOptimizationProfile(profile);
   }
   config->setMaxWorkspaceSize(options_.max_workspace_size);
-  std::cout << "Add profile to config done\n";
 
   if (options_.FP16)
   {
@@ -178,6 +170,7 @@ bool Engine::build(std::string onnx_path)
   outfile.write(reinterpret_cast<const char *>(plan->data()), plan->size());
 
   std::cout << "Success, saved engine to " << engine_name_ << std::endl;
+  return true;
 }
 
 bool Engine::loadNetwork()
