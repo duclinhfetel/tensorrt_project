@@ -1,0 +1,1 @@
+python3 -m tf2onnx.convert --input ./frozen_models/frozen_graph.pb --output model.onnx  --inputs-as-nchw x:0  --outputs Identity:0 --inputs x:0
