@@ -1,0 +1,31 @@
+vf@vf:~/tensorrt_project/PYTHON/tensorflow/object_detection$ python3 -m tf2onnx.convert --saved-model my_model/save_model_input_float_no_fix_shape/saved_model/ --output ssd_320x320_float.onnx --opset 13
+/usr/lib/python3.6/runpy.py:125: RuntimeWarning: 'tf2onnx.convert' found in sys.modules after import of package 'tf2onnx', but prior to execution of 'tf2onnx.convert'; this may result in unpredictable behaviour
+  warn(RuntimeWarning(msg))
+2022-04-21 21:51:22,763 - WARNING - '--tag' not specified for saved_model. Using --tag serve
+2022-04-21 21:51:30,921 - INFO - Signatures found in model: [serving_default].
+2022-04-21 21:51:30,921 - WARNING - '--signature_def' not specified, using first signature: serving_default
+2022-04-21 21:51:30,922 - INFO - Output names: ['detection_anchor_indices', 'detection_boxes', 'detection_classes', 'detection_multiclass_scores', 'detection_scores', 'num_detections', 'raw_detection_boxes', 'raw_detection_scores']
+WARNING:tensorflow:From /home/vf/.local/lib/python3.6/site-packages/tf2onnx/tf_loader.py:706: extract_sub_graph (from tensorflow.python.framework.graph_util_impl) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use `tf.compat.v1.graph_util.extract_sub_graph`
+2022-04-21 21:51:33,393 - WARNING - From /home/vf/.local/lib/python3.6/site-packages/tf2onnx/tf_loader.py:706: extract_sub_graph (from tensorflow.python.framework.graph_util_impl) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use `tf.compat.v1.graph_util.extract_sub_graph`
+2022-04-21 21:51:34,844 - INFO - Using tensorflow=2.6.2, onnx=1.8.0, tf2onnx=1.9.3/1190aa
+2022-04-21 21:51:34,844 - INFO - Using opset <onnx, 13>
+2022-04-21 21:51:36,896 - INFO - Computed 0 values for constant folding
+2022-04-21 21:51:36,902 - INFO - Computed 0 values for constant folding
+2022-04-21 21:51:36,910 - INFO - Computed 0 values for constant folding
+2022-04-21 21:51:37,132 - INFO - Computed 4 values for constant folding
+2022-04-21 21:51:37,429 - INFO - folding node using tf type=Select, name=Postprocessor/BatchMultiClassNonMaxSuppression/map/while/PadOrClipBoxList/Select_4
+2022-04-21 21:51:37,430 - INFO - folding node using tf type=Select, name=Postprocessor/BatchMultiClassNonMaxSuppression/map/while/PadOrClipBoxList/Select_5
+2022-04-21 21:51:37,430 - INFO - folding node using tf type=Select, name=Postprocessor/BatchMultiClassNonMaxSuppression/map/while/PadOrClipBoxList/Select_8
+2022-04-21 21:51:37,430 - INFO - folding node using tf type=Select, name=Postprocessor/BatchMultiClassNonMaxSuppression/map/while/PadOrClipBoxList/Select_1
+2022-04-21 21:51:37,839 - INFO - Computed 0 values for constant folding
+2022-04-21 21:51:40,430 - INFO - Optimizing ONNX model
+2022-04-21 21:52:00,709 - INFO - After optimization: BatchNormalization -53 (60->7), Cast -122 (516->394), Const -604 (1761->1157), Gather +6 (138->144), Identity -106 (106->0), Less -2 (28->26), Mul -2 (154->152), Placeholder -9 (18->9), Reshape -28 (136->108), Shape -8 (76->68), Slice -7 (147->140), Squeeze -22 (132->110), Transpose -270 (293->23), Unsqueeze -96 (198->102)
+2022-04-21 21:52:01,010 - INFO - 
+2022-04-21 21:52:01,011 - INFO - Successfully converted TensorFlow model my_model/save_model_input_float_no_fix_shape/saved_model/ to ONNX
+2022-04-21 21:52:01,011 - INFO - Model inputs: ['input_tensor']
+2022-04-21 21:52:01,011 - INFO - Model outputs: ['detection_anchor_indices', 'detection_boxes', 'detection_classes', 'detection_multiclass_scores', 'detection_scores', 'num_detections', 'raw_detection_boxes', 'raw_detection_scores']
+2022-04-21 21:52:01,011 - INFO - ONNX model is saved at ssd_320x320_float.onnx

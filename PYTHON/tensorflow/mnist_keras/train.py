@@ -42,7 +42,7 @@ y_test = tf.keras.utils.to_categorical(y_test, num_classes)
 print(y_train.shape)
 
 adam = tf.keras.optimizers.Adam(
-    lr=0.001, beta_1=0.9, beta_2=0.999, epsilon=0.001, decay=0.0)
+    learning_rate=0.001, beta_1=0.9, beta_2=0.999, epsilon=0.001, decay=0.0)
 
 model.compile(loss="categorical_crossentropy",
               optimizer=adam, metrics=["accuracy"])

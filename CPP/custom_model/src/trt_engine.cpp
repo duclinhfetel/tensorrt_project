@@ -270,9 +270,9 @@ bool Engine::runInference(const std::vector<cv::Mat> &batch_image,
     cv::subtract(image, cv::Scalar(0.5f, 0.5f, 0.5f), image, cv::noArray(), -1);
     cv::divide(image, cv::Scalar(0.5f, 0.5f, 0.5f), image, 1, -1);
 
-    std::cout << "Input Shape: " << image.rows 
-    << ", " << image.cols << ", " << image.channels() << "\n";
-    // NHWC to NCHW conversion 
+    std::cout << "Input Shape: " << image.rows
+              << ", " << image.cols << ", " << image.channels() << "\n";
+    // NHWC to NCHW conversion
     // NHWC: For each pixel, its 3 colors are stored together in RGB order.
     // For a 3 channel image, say RGB, pixels of the R channel are stored first, then the G channel and finally the B channel.
     // https://user-images.githubusercontent.com/20233731/85104458-3928a100-b23b-11ea-9e7e-95da726fef92.png
@@ -310,9 +310,9 @@ bool Engine::runInference(const std::vector<cv::Mat> &batch_image,
   std::vector<void *> predicitonBindings = {input_buff_.deviceBuffer.data(),
                                             output_buff_.deviceBuffer.data()};
   // Run inference.
-  
+
   bool status = contex_->enqueueV2(predicitonBindings.data(), cuda_stream_, nullptr);
-  
+
   if (!status)
   {
     return false;
